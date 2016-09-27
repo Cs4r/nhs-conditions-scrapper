@@ -9,7 +9,7 @@ package caguilera.assessment.nhs;
  *            any {@link Website}
  *
  */
-public interface WebPage<T extends Website> {
+public interface WebPage<T extends Website<?>> {
 
 	String getUrl();
 

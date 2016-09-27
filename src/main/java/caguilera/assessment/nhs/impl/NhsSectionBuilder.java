@@ -12,6 +12,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import caguilera.assessment.nhs.SectionBuilder;
+import caguilera.assessment.nhs.WebPage;
 
 /**
  * A {@link SectionBuilder} for {@link NhsWebSection}s
@@ -26,9 +27,7 @@ public class NhsSectionBuilder implements SectionBuilder<NhsWebSection> {
 	// These two fields are only used for testing purposes
 	boolean testMode;
 	Document document;
-
-	public NhsSectionBuilder() {}
-
+	
 	// Constructor for testing purposes
 	NhsSectionBuilder(NhsPageBuilder pageBuilder) {
 		super();
@@ -43,8 +42,9 @@ public class NhsSectionBuilder implements SectionBuilder<NhsWebSection> {
 			String url = getSectionUrl(document);
 			Set<String> links = getSectionLinks(document);
 
-			Set<NhsWebPage> pages = links.stream().parallel().map(pageBuilder::build).filter(Optional::isPresent)
-					.map(Optional::get).collect(Collectors.toCollection(() -> ConcurrentHashMap.newKeySet()));
+			Set<WebPage<NhsWebsite>> pages = links.stream().parallel().map(pageBuilder::build)
+					.filter(Optional::isPresent).map(Optional::get)
+					.collect(Collectors.toCollection(() -> ConcurrentHashMap.newKeySet()));
 
 			return Optional.of(NhsWebSection.of(title, url, pages));
 

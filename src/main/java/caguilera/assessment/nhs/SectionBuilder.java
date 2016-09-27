@@ -8,7 +8,7 @@ import java.util.Optional;
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  * 
  */
-public interface SectionBuilder<T extends WebSection<?, ?>> {
+public interface SectionBuilder<T extends WebSection<?>> {
 
 	/**
 	 * Given the URL of a web section, constructs a {@link WebSection}

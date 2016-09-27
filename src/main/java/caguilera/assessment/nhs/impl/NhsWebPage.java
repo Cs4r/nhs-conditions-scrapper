@@ -1,5 +1,7 @@
 package caguilera.assessment.nhs.impl;
 
+import static caguilera.assessment.nhs.impl.ParametersValidator.throwIfAnyIsNull;
+
 import caguilera.assessment.nhs.WebPage;
 
 /**
@@ -13,6 +15,25 @@ public class NhsWebPage implements WebPage<NhsWebsite> {
 	private final String url;
 	private final String title;
 	private final String content;
+
+	/**
+	 * Creates instances of {@link NhsWebPage}
+	 * 
+	 * @param title
+	 *            the page's title
+	 * @param url
+	 *            the page's url
+	 * @param content
+	 *            the page's content
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if any parameter is null
+	 * @return an instance of {@link NhsWebPage}
+	 */
+	static NhsWebPage of(String title, String url, String content) {
+		throwIfAnyIsNull(url, title, content);
+		return new NhsWebPage(url, title, content);
+	}
 
 	private NhsWebPage(String url, String title, String content) {
 		this.url = url;
@@ -70,32 +91,6 @@ public class NhsWebPage implements WebPage<NhsWebsite> {
 		} else if (!url.equals(other.url))
 			return false;
 		return true;
-	}
-
-	/**
-	 * Creates instances of {@link NhsWebPage}
-	 * @param title
-	 *            the page's title
-	 * @param url
-	 *            the page's url
-	 * @param content
-	 *            the page's content
-	 * 
-	 * @throws IllegalArgumentException
-	 *             if any parameter is null
-	 * @return an instance of {@link NhsWebPage}
-	 */
-	static NhsWebPage of(String title, String url, String content) {
-		throwIfAnyIsNull(url, title, content);
-		return new NhsWebPage(url, title, content);
-	}
-
-	private static void throwIfAnyIsNull(Object... params) {
-		for (int i = 0; i < params.length; i++) {
-			if (params[i] == null) {
-				throw new IllegalArgumentException();
-			}
-		}
 	}
 
 }

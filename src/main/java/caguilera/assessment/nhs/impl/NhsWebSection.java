@@ -1,8 +1,11 @@
 package caguilera.assessment.nhs.impl;
 
+import static caguilera.assessment.nhs.impl.ParametersValidator.throwIfAnyIsNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import caguilera.assessment.nhs.WebPage;
 import caguilera.assessment.nhs.WebSection;
 
 /**
@@ -11,13 +14,31 @@ import caguilera.assessment.nhs.WebSection;
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  *
  */
-public class NhsWebSection implements WebSection<NhsWebsite, NhsWebPage> {
+public class NhsWebSection implements WebSection<NhsWebsite> {
 
-	private final Set<NhsWebPage> pages;
+	private final Set<WebPage<NhsWebsite>> pages;
 	private final String url;
 	private final String title;
 
-	private NhsWebSection(String title, String url, Set<NhsWebPage> pages) {
+	/**
+	 * Creates instances of {@link NhsWebPage}
+	 * 
+	 * @param title
+	 *            the page's title
+	 * @param url
+	 *            the page's url
+	 * @param pages
+	 *            the section's pages
+	 * @throws IllegalArgumentException
+	 *             if any parameter is null
+	 * @return an instance of {@link NhsWebSection}
+	 */
+	static NhsWebSection of(String title, String url, Set<WebPage<NhsWebsite>> pages) {
+		throwIfAnyIsNull(url, title, pages);
+		return new NhsWebSection(title, url, pages);
+	}
+
+	private NhsWebSection(String title, String url, Set<WebPage<NhsWebsite>> pages) {
 		this.title = title;
 		this.url = url;
 		this.pages = new HashSet<>(pages);
@@ -34,7 +55,7 @@ public class NhsWebSection implements WebSection<NhsWebsite, NhsWebPage> {
 	}
 
 	@Override
-	public Set<NhsWebPage> getPages() {
+	public Set<WebPage<NhsWebsite>> getPages() {
 		return new HashSet<>(pages);
 	}
 
@@ -74,31 +95,4 @@ public class NhsWebSection implements WebSection<NhsWebsite, NhsWebPage> {
 			return false;
 		return true;
 	}
-
-	/**
-	 * Creates instances of {@link NhsWebPage}
-	 * 
-	 * @param title
-	 *            the page's title
-	 * @param url
-	 *            the page's url
-	 * @param pages
-	 *            the section's pages
-	 * @throws IllegalArgumentException
-	 *             if any parameter is null
-	 * @return an instance of {@link NhsWebSection}
-	 */
-	static NhsWebSection of(String title, String url, Set<NhsWebPage> pages) {
-		throwIfAnyIsNull(url, title, pages);
-		return new NhsWebSection(title, url, pages);
-	}
-
-	private static void throwIfAnyIsNull(Object... params) {
-		for (int i = 0; i < params.length; i++) {
-			if (params[i] == null) {
-				throw new IllegalArgumentException();
-			}
-		}
-	}
-
 }

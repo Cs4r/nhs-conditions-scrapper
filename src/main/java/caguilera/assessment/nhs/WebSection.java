@@ -9,14 +9,12 @@ import java.util.Set;
  * 
  * @param <T>
  *            any {@link Website}
- * @param <U>
- *            the type of the pages of a {@link WebSection}
  */
-public interface WebSection<T extends Website, U extends WebPage<T>> {
+public interface WebSection<T extends Website<T>> {
 
 	String getTitle();
 
 	String getUrl();
 
-	Set<U> getPages();
+	Set<WebPage<T>> getPages();
 }

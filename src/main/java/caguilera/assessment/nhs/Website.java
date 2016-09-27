@@ -1,11 +1,16 @@
 package caguilera.assessment.nhs;
 
+import java.util.Set;
+
 /**
- * Marker interface that represents a website that can be scrapped
+ * Represents a web site that can be scrapped
  * 
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  *
  */
-public interface Website {
-	// Marker for the moment
+public interface Website<R extends Website<R>> {
+
+	String getUrl();
+
+	Set<WebSection<R>> getSections();
 }

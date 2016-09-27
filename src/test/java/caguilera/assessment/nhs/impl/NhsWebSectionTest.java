@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
+import caguilera.assessment.nhs.WebPage;
+
 /**
  * Unit tests for {@link NhsWebSection}
  * 
@@ -18,40 +20,41 @@ import com.google.common.collect.Sets;
  */
 public class NhsWebSectionTest {
 
-	private static final String url = "URL";
-	private static final String title = "TITLE";
-	private Set<NhsWebPage> pages;
+	private static final String URL = "URL";
+	private static final String TITLE = "TITLE";
+	private Set<WebPage<NhsWebsite>> pages;
 	private NhsWebSection nhsWebSection;
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		pages = Sets.newHashSet(mock(NhsWebPage.class), mock(NhsWebPage.class));
-		nhsWebSection = NhsWebSection.of(title, url, pages);
+		nhsWebSection = NhsWebSection.of(TITLE, URL, pages);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ofThrowsIllegalArgumentExceptionIfUrlisNull() {
-		NhsWebSection.of(title, null, pages);
+		NhsWebSection.of(TITLE, null, pages);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ofThrowsIllegalArgumentExceptionIfTitleisNull() {
-		NhsWebSection.of(null, url, pages);
+		NhsWebSection.of(null, URL, pages);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ofThrowsIllegalArgumentExceptionIfPagesisNull() {
-		NhsWebSection.of(title, url, null);
+		NhsWebSection.of(TITLE, URL, null);
 	}
 
 	@Test
 	public void getUrlReturnsUrl() {
-		assertEquals(url, nhsWebSection.getUrl());
+		assertEquals(URL, nhsWebSection.getUrl());
 	}
 
 	@Test
 	public void getTitleReturnsTitle() {
-		assertEquals(title, nhsWebSection.getTitle());
+		assertEquals(TITLE, nhsWebSection.getTitle());
 	}
 
 	@Test
