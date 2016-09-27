@@ -7,11 +7,13 @@ import java.util.Optional;
  * 
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  * 
- * @param <T>
+ * @param <R>
  *            any {@link Website}
  *
+ * @param <R>
+ *            a page of the {@link Website}
  */
-public interface PageBuilder<T extends Website> {
+public interface PageBuilder<R extends Website, T extends WebPage<R>> {
 
 	/**
 	 * Given the URL of a web page, constructs a {@link WebPage}
@@ -21,5 +23,5 @@ public interface PageBuilder<T extends Website> {
 	 * @return a {@link WebPage} if pageUrl can be accessed and read properly,
 	 *         {@link Optional#empty()} otherwise
 	 */
-	Optional<WebPage<T>> build(String pageUrl);
+	Optional<T> build(String pageUrl);
 }
