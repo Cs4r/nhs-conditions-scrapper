@@ -1,28 +1,26 @@
 package caguilera.assessment.nhs.impl;
 
-import caguilera.assessment.nhs.WebPage;
+import java.util.HashSet;
+import java.util.Set;
+
+import caguilera.assessment.nhs.WebSection;
 
 /**
- * Holds information about a web page of the {@link NhsWebsite}
+ * Holds information of a section of the {@link NhsWebsite}
  * 
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  *
  */
-public class NhsWebPage implements WebPage<NhsWebsite> {
+public class NhsWebSection implements WebSection<NhsWebsite, NhsWebPage> {
 
+	private final Set<NhsWebPage> pages;
 	private final String url;
 	private final String title;
-	private final String content;
 
-	private NhsWebPage(String url, String title, String content) {
-		this.url = url;
+	private NhsWebSection(String title, String url, Set<NhsWebPage> pages) {
 		this.title = title;
-		this.content = content;
-	}
-
-	@Override
-	public String getUrl() {
-		return url;
+		this.url = url;
+		this.pages = new HashSet<>(pages);
 	}
 
 	@Override
@@ -31,15 +29,20 @@ public class NhsWebPage implements WebPage<NhsWebsite> {
 	}
 
 	@Override
-	public String getContent() {
-		return content;
+	public String getUrl() {
+		return url;
+	}
+
+	@Override
+	public Set<NhsWebPage> getPages() {
+		return new HashSet<>(pages);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((pages == null) ? 0 : pages.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
@@ -53,11 +56,11 @@ public class NhsWebPage implements WebPage<NhsWebsite> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NhsWebPage other = (NhsWebPage) obj;
-		if (content == null) {
-			if (other.content != null)
+		NhsWebSection other = (NhsWebSection) obj;
+		if (pages == null) {
+			if (other.pages != null)
 				return false;
-		} else if (!content.equals(other.content))
+		} else if (!pages.equals(other.pages))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -74,20 +77,20 @@ public class NhsWebPage implements WebPage<NhsWebsite> {
 
 	/**
 	 * Creates instances of {@link NhsWebPage}
+	 * 
 	 * @param title
 	 *            the page's title
 	 * @param url
 	 *            the page's url
-	 * @param content
-	 *            the page's content
-	 * 
+	 * @param pages
+	 *            the section's pages
 	 * @throws IllegalArgumentException
 	 *             if any parameter is null
-	 * @return an instance of {@link NhsWebPage}
+	 * @return an instance of {@link NhsWebSection}
 	 */
-	static NhsWebPage of(String title, String url, String content) {
-		throwIfAnyIsNull(url, title, content);
-		return new NhsWebPage(url, title, content);
+	static NhsWebSection of(String title, String url, Set<NhsWebPage> pages) {
+		throwIfAnyIsNull(url, title, pages);
+		return new NhsWebSection(title, url, pages);
 	}
 
 	private static void throwIfAnyIsNull(Object... params) {

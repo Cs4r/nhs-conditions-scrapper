@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import caguilera.assessment.nhs.NhsWebsite;
 import caguilera.assessment.nhs.PageBuilder;
 
 /**
@@ -17,7 +16,7 @@ import caguilera.assessment.nhs.PageBuilder;
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  *
  */
-public class NhsPageBuilder implements PageBuilder<NhsWebsite, NhsWebPage> {
+public class NhsPageBuilder implements PageBuilder<NhsWebPage> {
 
 	// These two fields are only used for testing purposes
 	boolean testMode;
@@ -39,7 +38,7 @@ public class NhsPageBuilder implements PageBuilder<NhsWebsite, NhsWebPage> {
 				String title = removeHtmlSpacesAndTrim(getPageTitle(doc));
 				String content = removeHtmlSpacesAndTrim(page.text());
 
-				return Optional.of(NhsWebPage.of(url, title, content));
+				return Optional.of(NhsWebPage.of(title, url, content));
 			}
 
 		} catch (Exception e) {

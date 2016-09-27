@@ -13,29 +13,29 @@ import org.junit.Test;
  */
 public class NhsWebPageTest {
 
-	private static String url = "URL";
-	private static String title = "TITLE";
-	private static String content = "CONTENT";
+	private static final String url = "URL";
+	private static final String title = "TITLE";
+	private static final String content = "CONTENT";
 	private NhsWebPage nhswebpage;
 
 	@Before
 	public void setUp() {
-		nhswebpage = NhsWebPage.of(url, title, content);
+		nhswebpage = NhsWebPage.of(title, url, content);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ofThrowsIllegalArgumentExceptionIfUrlisNull() {
-		NhsWebPage.of(null, title, content);
+		NhsWebPage.of(title, null, content);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ofThrowsIllegalArgumentExceptionIfTitleisNull() {
-		NhsWebPage.of(url, null, content);
+		NhsWebPage.of(null, url, content);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ofThrowsIllegalArgumentExceptionIfContentisNull() {
-		NhsWebPage.of(url, title, null);
+		NhsWebPage.of(title, url, null);
 	}
 	
 	@Test
