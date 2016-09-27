@@ -11,7 +11,7 @@ package caguilera.assessment.nhs;
  */
 public interface WebPage<T extends Website> {
 
-	String getURL();
+	String getUrl();
 
 	String getTitle();
 
