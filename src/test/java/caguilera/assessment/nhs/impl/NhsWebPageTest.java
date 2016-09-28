@@ -13,9 +13,9 @@ import org.junit.Test;
  */
 public class NhsWebPageTest {
 
-	private static final String url = "URL";
-	private static final String title = "TITLE";
-	private static final String content = "CONTENT";
+	private static final String url = "url";
+	private static final String title = "title";
+	private static final String content = "content";
 	private NhsWebPage nhswebpage;
 
 	@Before

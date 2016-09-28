@@ -1,6 +1,7 @@
 package caguilera.assessment.nhs.impl;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -10,6 +11,8 @@ import java.util.stream.Collectors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import caguilera.assessment.nhs.SectionBuilder;
 import caguilera.assessment.nhs.WebPage;
@@ -20,14 +23,20 @@ import caguilera.assessment.nhs.WebPage;
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  *
  */
+@Component
 public class NhsSectionBuilder implements SectionBuilder<NhsWebSection> {
 
-	private NhsPageBuilder pageBuilder = new NhsPageBuilder();
+	private static final String WEBSITE = "http://www.nhs.uk";
+	private static final String MINIMUM_PAGE_PREFIX = "/conditions/";
+	private static final String FULL_PAGE_PREFIX = "http://www.nhs.uk/conditions/";
+
+	@Autowired
+	private NhsPageBuilder pageBuilder;
 
 	// These two fields are only used for testing purposes
 	boolean testMode;
 	Document document;
-	
+
 	// Constructor for testing purposes
 	NhsSectionBuilder(NhsPageBuilder pageBuilder) {
 		super();
@@ -40,11 +49,11 @@ public class NhsSectionBuilder implements SectionBuilder<NhsWebSection> {
 			Document document = getDocument(sectionUrl);
 			String title = getSectionTitle(document);
 			String url = getSectionUrl(document);
-			Set<String> links = getSectionLinks(document);
+			Set<String> links = getPageLinks(document);
 
 			Set<WebPage<NhsWebsite>> pages = links.stream().parallel().map(pageBuilder::build)
 					.filter(Optional::isPresent).map(Optional::get)
-					.collect(Collectors.toCollection(() -> ConcurrentHashMap.newKeySet()));
+					.collect(Collectors.toCollection(() -> Collections.newSetFromMap(new ConcurrentHashMap<>())));
 
 			return Optional.of(NhsWebSection.of(title, url, pages));
 
@@ -69,15 +78,15 @@ public class NhsSectionBuilder implements SectionBuilder<NhsWebSection> {
 		return document.location();
 	}
 
-	private Set<String> getSectionLinks(Document document) {
+	private Set<String> getPageLinks(Document document) {
 		Set<String> links = new HashSet<>();
 
 		for (Element element : document.select("#haz-mod5 li>a")) {
 			String possibleLink = element.attr("href").toLowerCase();
-			if (possibleLink.startsWith("http://www.nhs.uk/conditions/")) {
+			if (possibleLink.startsWith(FULL_PAGE_PREFIX)) {
 				links.add(possibleLink);
-			} else if (possibleLink.startsWith("/conditions/")) {
-				links.add("http://www.nhs.uk" + possibleLink);
+			} else if (possibleLink.startsWith(MINIMUM_PAGE_PREFIX)) {
+				links.add(WEBSITE + possibleLink);
 			}
 		}
 

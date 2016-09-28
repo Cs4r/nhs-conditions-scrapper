@@ -33,7 +33,7 @@ public class NhsWebSection implements WebSection<NhsWebsite> {
 	 *             if any parameter is null
 	 * @return an instance of {@link NhsWebSection}
 	 */
-	static NhsWebSection of(String title, String url, Set<WebPage<NhsWebsite>> pages) {
+	public static NhsWebSection of(String title, String url, Set<WebPage<NhsWebsite>> pages) {
 		throwIfAnyIsNull(url, title, pages);
 		return new NhsWebSection(title, url, pages);
 	}

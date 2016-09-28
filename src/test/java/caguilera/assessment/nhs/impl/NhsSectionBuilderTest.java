@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Optional;
 
 import org.jsoup.Jsoup;
@@ -35,12 +36,12 @@ public class NhsSectionBuilderTest {
 	public void setUp() {
 		pageBuilder = mock(NhsPageBuilder.class);
 		sectionBuilder = new NhsSectionBuilder(pageBuilder);
-		when(pageBuilder.build(anyString())).thenAnswer(new Answer<Optional<NhsWebPage>>() {
+		when(pageBuilder.build(anyString())).thenAnswer(new Answer<Optional<NhsWebSection>>() {
 
 			@Override
-			public Optional<NhsWebPage> answer(InvocationOnMock invocation) throws Throwable {
+			public Optional<NhsWebSection> answer(InvocationOnMock invocation) throws Throwable {
 				String pageUrl = (String) invocation.getArguments()[0];
-				return Optional.of(NhsWebPage.of(pageUrl, pageUrl, pageUrl));
+				return Optional.of(NhsWebSection.of(pageUrl, pageUrl, Collections.emptySet()));
 			}
 		});
 	}
@@ -70,80 +71,80 @@ public class NhsSectionBuilderTest {
 		sectionBuilder.testMode = true;
 		mockDocument(TEST_DATA_PATH + "SectionC.html");
 
-		Optional<NhsWebSection> optionalWebPage = sectionBuilder.build(DUMMY_URL);
+		Optional<NhsWebSection> optionalSection = sectionBuilder.build(DUMMY_URL);
 
-		assertTrue(optionalWebPage.isPresent());
-		NhsWebSection webPage = optionalWebPage.get();
-		assertEquals(getFileContent(TEST_DATA_PATH + "SectionC.title"), webPage.getTitle());
-		assertEquals(225, webPage.getPages().size());
-		assertEquals("", webPage.getUrl());
+		assertTrue(optionalSection.isPresent());
+		NhsWebSection section = optionalSection.get();
+		assertEquals(getFileContent(TEST_DATA_PATH + "SectionC.title"), section.getTitle());
+		assertEquals(225, section.getPages().size());
+		assertEquals("", section.getUrl());
 	}
-	
+
 	@Test
 	@Ignore
 	public void buildReturnsCorrectSectionForLetterC_withRealData() {
 		String sectionUrl = "http://www.nhs.uk/Conditions/Pages/BodyMap.aspx?Index=C";
-		Optional<NhsWebSection> optionalWebPage = sectionBuilder.build(sectionUrl);
+		Optional<NhsWebSection> optionalSection = sectionBuilder.build(sectionUrl);
 
-		assertTrue(optionalWebPage.isPresent());
-		NhsWebSection webPage = optionalWebPage.get();
-		assertEquals(getFileContent(TEST_DATA_PATH + "SectionC.title"), webPage.getTitle());
-		assertEquals(225, webPage.getPages().size());
-		assertEquals(sectionUrl, webPage.getUrl());
+		assertTrue(optionalSection.isPresent());
+		NhsWebSection section = optionalSection.get();
+		assertEquals(getFileContent(TEST_DATA_PATH + "SectionC.title"), section.getTitle());
+		assertEquals(225, section.getPages().size());
+		assertEquals(sectionUrl, section.getUrl());
 	}
-	
+
 	@Test
 	public void buildReturnsCorrectSectionForLetterW_withMockedData() {
 		sectionBuilder.testMode = true;
 		mockDocument(TEST_DATA_PATH + "SectionW.html");
 
-		Optional<NhsWebSection> optionalWebPage = sectionBuilder.build(DUMMY_URL);
+		Optional<NhsWebSection> optionalSection = sectionBuilder.build(DUMMY_URL);
 
-		assertTrue(optionalWebPage.isPresent());
-		NhsWebSection webPage = optionalWebPage.get();
-		assertEquals(getFileContent(TEST_DATA_PATH + "SectionW.title"), webPage.getTitle());
-		assertEquals(25, webPage.getPages().size());
-		assertEquals("", webPage.getUrl());
+		assertTrue(optionalSection.isPresent());
+		NhsWebSection section = optionalSection.get();
+		assertEquals(getFileContent(TEST_DATA_PATH + "SectionW.title"), section.getTitle());
+		assertEquals(25, section.getPages().size());
+		assertEquals("", section.getUrl());
 	}
-	
+
 	@Test
 	@Ignore
 	public void buildReturnsCorrectSectionForLetterW_withRealData() {
 		String sectionUrl = "http://www.nhs.uk/Conditions/Pages/BodyMap.aspx?Index=W";
-		Optional<NhsWebSection> optionalWebPage = sectionBuilder.build(sectionUrl);
+		Optional<NhsWebSection> optionalSection = sectionBuilder.build(sectionUrl);
 
-		assertTrue(optionalWebPage.isPresent());
-		NhsWebSection webPage = optionalWebPage.get();
-		assertEquals(getFileContent(TEST_DATA_PATH + "SectionW.title"), webPage.getTitle());
-		assertEquals(25, webPage.getPages().size());
-		assertEquals(sectionUrl, webPage.getUrl());
+		assertTrue(optionalSection.isPresent());
+		NhsWebSection section = optionalSection.get();
+		assertEquals(getFileContent(TEST_DATA_PATH + "SectionW.title"), section.getTitle());
+		assertEquals(25, section.getPages().size());
+		assertEquals(sectionUrl, section.getUrl());
 	}
-	
+
 	@Test
 	public void buildReturnsCorrectSectionForLetterF_withMockedData() {
 		sectionBuilder.testMode = true;
 		mockDocument(TEST_DATA_PATH + "SectionF.html");
 
-		Optional<NhsWebSection> optionalWebPage = sectionBuilder.build(DUMMY_URL);
+		Optional<NhsWebSection> optionalSection = sectionBuilder.build(DUMMY_URL);
 
-		assertTrue(optionalWebPage.isPresent());
-		NhsWebSection webPage = optionalWebPage.get();
-		assertEquals(getFileContent(TEST_DATA_PATH + "SectionF.title"), webPage.getTitle());
-		assertEquals(63, webPage.getPages().size());
-		assertEquals("", webPage.getUrl());
+		assertTrue(optionalSection.isPresent());
+		NhsWebSection section = optionalSection.get();
+		assertEquals(getFileContent(TEST_DATA_PATH + "SectionF.title"), section.getTitle());
+		assertEquals(63, section.getPages().size());
+		assertEquals("", section.getUrl());
 	}
-	
+
 	@Test
 	@Ignore
 	public void buildReturnsCorrectSectionForLetterF_withRealData() {
 		String sectionUrl = "http://www.nhs.uk/Conditions/Pages/BodyMap.aspx?Index=F";
-		Optional<NhsWebSection> optionalWebPage = sectionBuilder.build(sectionUrl);
+		Optional<NhsWebSection> optionalSection = sectionBuilder.build(sectionUrl);
 
-		assertTrue(optionalWebPage.isPresent());
-		NhsWebSection webPage = optionalWebPage.get();
-		assertEquals(getFileContent(TEST_DATA_PATH + "SectionF.title"), webPage.getTitle());
-		assertEquals(63, webPage.getPages().size());
-		assertEquals(sectionUrl, webPage.getUrl());
+		assertTrue(optionalSection.isPresent());
+		NhsWebSection section = optionalSection.get();
+		assertEquals(getFileContent(TEST_DATA_PATH + "SectionF.title"), section.getTitle());
+		assertEquals(63, section.getPages().size());
+		assertEquals(sectionUrl, section.getUrl());
 	}
 
 	private void mockDocument(String url) {

@@ -30,7 +30,7 @@ public class NhsWebPage implements WebPage<NhsWebsite> {
 	 *             if any parameter is null
 	 * @return an instance of {@link NhsWebPage}
 	 */
-	static NhsWebPage of(String title, String url, String content) {
+	public static NhsWebPage of(String title, String url, String content) {
 		throwIfAnyIsNull(url, title, content);
 		return new NhsWebPage(url, title, content);
 	}

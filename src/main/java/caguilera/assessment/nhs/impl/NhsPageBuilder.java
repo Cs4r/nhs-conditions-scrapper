@@ -7,6 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import caguilera.assessment.nhs.PageBuilder;
 
@@ -16,6 +17,7 @@ import caguilera.assessment.nhs.PageBuilder;
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  *
  */
+@Component
 public class NhsPageBuilder implements PageBuilder<NhsWebPage> {
 
 	// These two fields are only used for testing purposes
