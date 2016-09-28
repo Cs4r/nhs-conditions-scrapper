@@ -51,7 +51,6 @@ public class NhsPagesRepository implements PagesRepository<NhsWebPage> {
 	public void insert(NhsWebPage page) {
 		throwIfAnyIsNull(page);
 		collection.insertOne(getMongoDocumentFromPage(page));
-		System.out.println("Inserted page: " + page.getTitle());
 	}
 
 	private Document getMongoDocumentFromPage(NhsWebPage page) {
@@ -94,7 +93,7 @@ public class NhsPagesRepository implements PagesRepository<NhsWebPage> {
 
 	private NhsWebPage getPageFromMongoDocument(Document document) {
 		String title = (String) document.get("title");
-		String url = (String) document.get("title");
+		String url = (String) document.get("url");
 		String content = (String) document.get("content");
 		NhsWebPage of = NhsWebPage.of(title, url, content);
 		return of;

@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import caguilera.assessment.nhs.PagesRepository;
 import caguilera.assessment.nhs.WebsiteBuilder;
@@ -19,11 +20,15 @@ import caguilera.assessment.nhs.impl.NhsWebsite;
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  *
  */
+@Configuration
+@ComponentScan(basePackages = { "caguilera.assessment.nhs" })
 public class ConditionsCaching {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "spring-conf.xml" });
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.register(ConditionsCaching.class);
+		context.refresh();
 
 		WebsiteBuilder<NhsWebsite> websiteBuilder = (WebsiteBuilder<NhsWebsite>) context.getBean(WebsiteBuilder.class);
 
