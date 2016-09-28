@@ -55,7 +55,7 @@ public class NhsSectionBuilder implements SectionBuilder<NhsWebSection> {
 			String url = getSectionUrl(document);
 			Set<String> links = getPageLinks(document);
 
-			Set<WebPage<NhsWebsite>> pages = links.stream().parallel().map(pageBuilder::build)
+			Set<WebPage<NhsWebsite>> pages = links.parallelStream().map(pageBuilder::build)
 					.filter(Optional::isPresent).map(Optional::get)
 					.collect(Collectors.toCollection(() -> Collections.newSetFromMap(new ConcurrentHashMap<>())));
 
