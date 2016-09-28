@@ -22,12 +22,12 @@ import caguilera.assessment.nhs.impl.NhsWebsite;
  */
 @Configuration
 @ComponentScan(basePackages = { "caguilera.assessment.nhs" })
-public class ConditionsCaching {
+public class NhsConditionsScraper {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.register(ConditionsCaching.class);
+		context.register(NhsConditionsScraper.class);
 		context.refresh();
 
 		WebsiteBuilder<NhsWebsite> websiteBuilder = (WebsiteBuilder<NhsWebsite>) context.getBean(WebsiteBuilder.class);
@@ -50,6 +50,8 @@ public class ConditionsCaching {
 
 			repository.bulkInsert(pages);
 		}
+
+		context.close();
 	}
 
 }

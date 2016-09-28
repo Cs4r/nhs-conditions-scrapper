@@ -15,8 +15,8 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
  */
 @SpringBootApplication(scanBasePackages = { "caguilera.assessment.nhs.impl",
 		"caguilera.assessment.nhs.rest" }, exclude = { MongoAutoConfiguration.class, MongoDataAutoConfiguration.class })
-public class ConditionsRestService {
+public class NhsConditionsRestService {
 	public static void main(String[] args) {
-		SpringApplication.run(ConditionsRestService.class, args);
+		SpringApplication.run(NhsConditionsRestService.class, args);
 	}
 }
