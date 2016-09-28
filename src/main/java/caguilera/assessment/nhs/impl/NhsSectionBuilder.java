@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +27,8 @@ import caguilera.assessment.nhs.WebPage;
  */
 @Component
 public class NhsSectionBuilder implements SectionBuilder<NhsWebSection> {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(NhsSectionBuilder.class);
 
 	private static final String WEBSITE = "http://www.nhs.uk";
 	private static final String MINIMUM_PAGE_PREFIX = "/conditions/";
@@ -54,6 +58,8 @@ public class NhsSectionBuilder implements SectionBuilder<NhsWebSection> {
 			Set<WebPage<NhsWebsite>> pages = links.stream().parallel().map(pageBuilder::build)
 					.filter(Optional::isPresent).map(Optional::get)
 					.collect(Collectors.toCollection(() -> Collections.newSetFromMap(new ConcurrentHashMap<>())));
+
+			LOGGER.info("Created section for the url: {}", sectionUrl);
 
 			return Optional.of(NhsWebSection.of(title, url, pages));
 

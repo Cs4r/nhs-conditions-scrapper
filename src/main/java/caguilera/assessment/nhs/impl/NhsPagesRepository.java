@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
@@ -22,15 +24,19 @@ import com.mongodb.client.MongoDatabase;
 import caguilera.assessment.nhs.PagesRepository;
 
 /**
- * Naive implementation of {@link PagesRepository} for the {@link NhsWebsite}
+ * Very naive implementation of {@link PagesRepository} for the
+ * {@link NhsWebsite}
  * 
  * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
  */
 @Repository
 public class NhsPagesRepository implements PagesRepository<NhsWebPage> {
 
-	private static final String DATA_BASE_NAME = "";
+	private static final Logger LOGGER = LoggerFactory.getLogger(NhsPagesRepository.class);
+
 	private static final String DB_URI = "";
+	private static final String DATA_BASE_NAME = "";
+	private static final String COLLECTION_NAME = "pages";
 	private final MongoCollection<Document> collection;
 	private MongoClient mongoClient;
 
@@ -38,7 +44,7 @@ public class NhsPagesRepository implements PagesRepository<NhsWebPage> {
 		MongoClientURI mongoClientURI = new MongoClientURI(DB_URI);
 		mongoClient = new MongoClient(mongoClientURI);
 		MongoDatabase database = mongoClient.getDatabase(DATA_BASE_NAME);
-		collection = database.getCollection("pages");
+		collection = database.getCollection(COLLECTION_NAME);
 	}
 
 	// Constructor to be used only in test
@@ -51,6 +57,7 @@ public class NhsPagesRepository implements PagesRepository<NhsWebPage> {
 	public void insert(NhsWebPage page) {
 		throwIfAnyIsNull(page);
 		collection.insertOne(getMongoDocumentFromPage(page));
+		LOGGER.info("Inserted the page: {}", page.getTitle());
 	}
 
 	private Document getMongoDocumentFromPage(NhsWebPage page) {
@@ -67,6 +74,7 @@ public class NhsPagesRepository implements PagesRepository<NhsWebPage> {
 		List<Document> documents = pages.parallelStream().map(page -> getMongoDocumentFromPage(page))
 				.collect(Collectors.toList());
 		collection.insertMany(documents);
+		LOGGER.info("Inserted {} pages in bulk", documents.size());
 	}
 
 	@Override
@@ -87,6 +95,8 @@ public class NhsPagesRepository implements PagesRepository<NhsWebPage> {
 			} catch (Exception e) {
 			}
 		}
+
+		LOGGER.info("Returning {} pages for the query '{}'", results.size(), query);
 
 		return results;
 	}

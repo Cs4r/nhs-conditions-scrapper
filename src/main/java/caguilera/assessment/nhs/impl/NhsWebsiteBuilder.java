@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,8 @@ import caguilera.assessment.nhs.WebsiteBuilder;
  */
 @Component
 public class NhsWebsiteBuilder implements WebsiteBuilder<NhsWebsite> {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(NhsWebsiteBuilder.class);
 
 	private static final String SECTION_PREFIX = "http://www.nhs.uk/conditions/pages/";
 	private static final String NHS_WEB_SITE = "http://www.nhs.uk/Conditions/Pages/hub.aspx";
@@ -49,6 +53,8 @@ public class NhsWebsiteBuilder implements WebsiteBuilder<NhsWebsite> {
 			Set<NhsWebSection> sections = sectionLinks.parallelStream().map(sectionBuilder::build)
 					.filter(Optional::isPresent).map(Optional::get)
 					.collect(Collectors.toCollection(() -> Collections.newSetFromMap(new ConcurrentHashMap<>())));
+
+			LOGGER.info("Created website for the url: {}", NHS_WEB_SITE);
 
 			return Optional.of(NhsWebsite.of(url, sections));
 

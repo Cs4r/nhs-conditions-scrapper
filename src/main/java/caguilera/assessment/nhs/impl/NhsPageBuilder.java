@@ -7,6 +7,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import caguilera.assessment.nhs.PageBuilder;
@@ -19,6 +21,8 @@ import caguilera.assessment.nhs.PageBuilder;
  */
 @Component
 public class NhsPageBuilder implements PageBuilder<NhsWebPage> {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(NhsPageBuilder.class);
 
 	// These two fields are only used for testing purposes
 	boolean testMode;
@@ -40,6 +44,8 @@ public class NhsPageBuilder implements PageBuilder<NhsWebPage> {
 				String title = removeHtmlSpacesAndTrim(getPageTitle(doc));
 				String content = removeHtmlSpacesAndTrim(page.text());
 
+				LOGGER.info("Created WebPage for the url: ", pageUrl);
+
 				return Optional.of(NhsWebPage.of(title, url, content));
 			}
 
@@ -60,7 +66,7 @@ public class NhsPageBuilder implements PageBuilder<NhsWebPage> {
 
 	private void removeWebZoneLeftSection(Element page) {
 		Element webZoneLeft = page.getElementById("webZoneLeft");
-		
+
 		if (webZoneLeft != null) {
 			webZoneLeft.remove();
 		}
