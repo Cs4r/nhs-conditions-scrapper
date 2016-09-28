@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfigurat
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
 /**
- * A SIMPLE rest service to search and point user to the most appropriate links
+ * A SIMPLE rest service to search and point the user to the most appropriate links
  * for requests like “what are the symptoms of cancer?” “treatments for
  * headaches”
  * 
