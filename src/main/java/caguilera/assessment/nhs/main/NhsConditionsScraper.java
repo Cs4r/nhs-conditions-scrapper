@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 
 import caguilera.assessment.nhs.PagesRepository;
 import caguilera.assessment.nhs.WebsiteBuilder;
-import caguilera.assessment.nhs.impl.NhsPageBuilder;
 import caguilera.assessment.nhs.impl.NhsWebPage;
 import caguilera.assessment.nhs.impl.NhsWebsite;
 
@@ -26,7 +25,7 @@ import caguilera.assessment.nhs.impl.NhsWebsite;
 @Configuration
 @ComponentScan(basePackages = { "caguilera.assessment.nhs" })
 public class NhsConditionsScraper {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(NhsConditionsScraper.class);
 
 	@SuppressWarnings("unchecked")
@@ -35,6 +34,7 @@ public class NhsConditionsScraper {
 		context.register(NhsConditionsScraper.class);
 		context.refresh();
 
+		LOGGER.info("Starting scraping procedure...");
 		WebsiteBuilder<NhsWebsite> websiteBuilder = (WebsiteBuilder<NhsWebsite>) context.getBean(WebsiteBuilder.class);
 
 		Optional<NhsWebsite> optionalWebsite = websiteBuilder.build();
@@ -49,7 +49,7 @@ public class NhsConditionsScraper {
 					.map(i -> (NhsWebPage) i)
 					.collect(Collectors.toList());
 			//@formatter:on
-			
+
 			LOGGER.info("Scraped {} pages", pages.size());
 			LOGGER.info("Storing pages into the database");
 
@@ -57,7 +57,7 @@ public class NhsConditionsScraper {
 					.getBean(PagesRepository.class);
 
 			repository.bulkInsert(pages);
-			
+
 			LOGGER.info("Stored {} pages", pages.size());
 		}
 

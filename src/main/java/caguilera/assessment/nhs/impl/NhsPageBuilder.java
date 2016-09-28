@@ -44,7 +44,7 @@ public class NhsPageBuilder implements PageBuilder<NhsWebPage> {
 				String title = removeHtmlSpacesAndTrim(getPageTitle(doc));
 				String content = removeHtmlSpacesAndTrim(page.text());
 
-				LOGGER.info("Created WebPage for the url: ", pageUrl);
+				LOGGER.info("Created WebPage for the url: {}", pageUrl);
 
 				return Optional.of(NhsWebPage.of(title, url, content));
 			}
