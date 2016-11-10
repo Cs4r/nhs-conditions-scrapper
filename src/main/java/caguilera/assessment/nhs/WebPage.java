@@ -3,7 +3,7 @@ package caguilera.assessment.nhs;
 /**
  * Holds basic information about a web page of a {@link Website}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  * 
  * @param <T>
  *            any {@link Website}

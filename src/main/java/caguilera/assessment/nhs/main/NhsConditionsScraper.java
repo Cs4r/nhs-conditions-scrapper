@@ -19,7 +19,7 @@ import caguilera.assessment.nhs.impl.NhsWebsite;
  * A service that scrapes the nhsChoice website and caches the condition pages
  * and their subpages content in a database
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 @Configuration

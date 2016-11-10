@@ -6,7 +6,7 @@ import java.util.Collection;
  * Provides some specific data operations on {@link WebPage}s of a
  * {@link Website} without exposing the underlying details of the database
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  * @param <T>
  *            a {@link WebPage} of a {@link Website}

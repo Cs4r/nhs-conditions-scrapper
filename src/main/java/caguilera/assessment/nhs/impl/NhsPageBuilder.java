@@ -16,7 +16,7 @@ import caguilera.assessment.nhs.PageBuilder;
 /**
  * A {@link PageBuilder} for {@link NhsWebPage}s
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 @Component

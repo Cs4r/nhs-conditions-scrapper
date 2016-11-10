@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * Unit tests for {@link NhsPageBuilder}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public class NhsPageBuilderTest {

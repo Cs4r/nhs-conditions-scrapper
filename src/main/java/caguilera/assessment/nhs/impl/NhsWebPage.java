@@ -7,7 +7,7 @@ import caguilera.assessment.nhs.WebPage;
 /**
  * Holds information about a web page of the {@link NhsWebsite}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public class NhsWebPage implements WebPage<NhsWebsite> {

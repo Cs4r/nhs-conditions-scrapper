@@ -15,7 +15,7 @@ import caguilera.assessment.nhs.WebPage;
 /**
  * Unit tests for {@link NhsWebSection}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public class NhsWebSectionTest {

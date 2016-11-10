@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Represents a web site that can be scraped
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public interface Website<R extends Website<R>> {

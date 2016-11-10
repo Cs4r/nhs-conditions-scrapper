@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * Builds {@link WebSection}s of a {@link Website}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  * 
  */
 public interface SectionBuilder<T extends WebSection<?>> {

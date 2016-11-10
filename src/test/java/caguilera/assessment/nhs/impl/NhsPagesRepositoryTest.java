@@ -18,7 +18,7 @@ import com.mongodb.client.MongoCollection;
 /**
  * Unit tests for {@link NhsPagesRepository}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public class NhsPagesRepositoryTest {

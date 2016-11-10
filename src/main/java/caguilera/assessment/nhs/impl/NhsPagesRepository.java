@@ -27,7 +27,7 @@ import caguilera.assessment.nhs.PagesRepository;
  * Very naive implementation of {@link PagesRepository} for the
  * {@link NhsWebsite}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  */
 @Repository
 public class NhsPagesRepository implements PagesRepository<NhsWebPage> {

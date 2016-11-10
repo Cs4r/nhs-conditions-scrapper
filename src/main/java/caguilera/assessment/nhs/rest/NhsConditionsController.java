@@ -17,7 +17,7 @@ import caguilera.assessment.nhs.impl.NhsWebPage;
  * A rest controller that points an user to the most appropriate pages for
  * requests like “what are the symptoms of cancer?” “treatments for headaches”
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  */
 @RestController
 public class NhsConditionsController {

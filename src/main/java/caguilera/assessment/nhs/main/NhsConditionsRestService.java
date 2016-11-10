@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
  * for requests like “what are the symptoms of cancer?” “treatments for
  * headaches”
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 @SpringBootApplication(scanBasePackages = { "caguilera.assessment.nhs.impl",

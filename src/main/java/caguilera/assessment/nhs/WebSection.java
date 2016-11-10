@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Holds basic information of a section of a website
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  * 
  * @param <T>
  *            any {@link Website}

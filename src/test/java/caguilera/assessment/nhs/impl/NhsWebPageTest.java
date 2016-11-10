@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * Unit tests for {@link NhsWebPage}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public class NhsWebPageTest {

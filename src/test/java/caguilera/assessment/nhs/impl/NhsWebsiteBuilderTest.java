@@ -20,7 +20,7 @@ import org.mockito.stubbing.Answer;
 /**
  * Unit tests for {@link NhsWebsiteBuilder}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public class NhsWebsiteBuilderTest {

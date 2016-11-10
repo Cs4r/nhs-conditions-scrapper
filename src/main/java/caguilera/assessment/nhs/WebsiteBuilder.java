@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * Builds {@link WebSite} objects
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  * 
  * @param <T>
  *            a page of a {@link Website}

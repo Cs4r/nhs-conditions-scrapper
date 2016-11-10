@@ -22,7 +22,7 @@ import caguilera.assessment.nhs.WebPage;
 /**
  * A {@link SectionBuilder} for {@link NhsWebSection}s
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 @Component

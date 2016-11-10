@@ -13,7 +13,7 @@ import com.google.common.collect.Sets;
 /**
  * Unit tests for {@link NhsWebsite}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public class NhsWebsiteTest {

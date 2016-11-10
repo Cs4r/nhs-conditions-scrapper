@@ -11,7 +11,7 @@ import caguilera.assessment.nhs.WebSection;
 /**
  * Holds information of a section of the {@link NhsWebsite}
  * 
- * @author Cesar Aguilera <cesar.aguilera.p@gmail.com>
+ * @author Cesar Aguilera
  *
  */
 public class NhsWebSection implements WebSection<NhsWebsite> {
